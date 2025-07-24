@@ -10,6 +10,7 @@ const registerUser = async (email: string, password: string, role: string, name:
 
 const loginUser = async (email: string, password: string) => {
   const user = await User.findOne({ email });
+  console.log(user);
   if (!user || !(await bcrypt.compare(password, user.password))) {
     throw new Error('Invalid credentials');
   }

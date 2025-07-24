@@ -36,4 +36,4 @@ const ProtocolDocumentSchema = new Schema<IProtocolDocument>(
   { timestamps: true }
 );
 
-export default mongoose.model<IProtocolDocument>('ProtocolDocument', ProtocolDocumentSchema);
+export default mongoose.model<IProtocolDocument>('protocol-documents', ProtocolDocumentSchema);

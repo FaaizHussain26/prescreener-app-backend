@@ -14,8 +14,8 @@ const seedUsers = async () => {
     await connectDB();
     await User.deleteMany({});
     const users = [
-      { email: 'admin@example.com', password: await bcrypt.hash('admin123', 10), role: 'admin', name: 'Admin User' },
-      { email: 'researcher@example.com', password: await bcrypt.hash('researcher123', 10), role: 'researcher', name: 'Researcher User' },
+      { email: 'admin@example.com', password: await bcrypt.hash('admin123', 10), role: 'admin', name: 'Admin User', site: 'SiteA' },
+      { email: 'researcher@example.com', password: await bcrypt.hash('researcher123', 10), role: 'researcher', name: 'Researcher User', site: 'SiteB' },
     ];
     await User.insertMany(users);
     console.log('Users seeded successfully');

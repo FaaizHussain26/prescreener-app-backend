@@ -13,8 +13,8 @@ const register = async (req: Request, res: Response) => {
 
 const login = async (req: Request, res: Response) => {
   try {
-    const { username, password } = req.body;
-    const { user, token, message } = await loginUser(username, password);
+    const { email, password } = req.body;
+    const { user, token, message } = await loginUser(email, password);
     res.json({ user, token, message });
   } catch (error) {
     res.status(401).json({ error: (error as Error).message });

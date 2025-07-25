@@ -11,6 +11,7 @@ import path from 'path';
 import './config/passport';
 import swaggerUi from 'swagger-ui-express';
 import cors from "cors";
+import protocolDetailsRoutes from './routes/uploaded-protocol-details.route';
 dotenv.config();
 const app = express();
 
@@ -27,6 +28,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/file', fileUploadRoutes);
+app.use('/api/protocol-details', protocolDetailsRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

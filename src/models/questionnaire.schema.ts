@@ -1,19 +1,20 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Document, Schema } from 'mongoose';
 
-export interface IQuestionnaire extends Document {
-  questionnaireID: string;
-  studyID: mongoose.Types.ObjectId;
-  questions: { text: string; type: string }[];
-  version: string;
-  status: string;
+export interface QuestionnaireDocument extends Document {
+  protocol_id: mongoose.Types.ObjectId | string;
+  protocol_name: string;
+  questionnaire: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-const QuestionnaireSchema: Schema = new Schema({
-  questionnaireID: { type: String, required: true, unique: true },
-  studyID: { type: Schema.Types.ObjectId, ref: 'Study', required: true },
-  questions: [{ text: String, type: String }],
-  version: { type: String, required: true },
-  status: { type: String, required: true },
-});
+const QuestionnaireSchema = new Schema<QuestionnaireDocument>(
+  {
+    protocol_id: { type: Schema.Types.ObjectId, ref: 'ProtocolDocument', required: true },
+    protocol_name: { type: String, required: true },
+    questionnaire: { type: String, required: true },
+  },
+  { timestamps: true }
+);
 
-export default mongoose.model<IQuestionnaire>('questionnaires', QuestionnaireSchema);
+export default mongoose.model<QuestionnaireDocument>('questionnaires', QuestionnaireSchema);

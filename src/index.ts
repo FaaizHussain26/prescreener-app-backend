@@ -12,6 +12,8 @@ import './config/passport';
 import swaggerUi from 'swagger-ui-express';
 import cors from "cors";
 import protocolDetailsRoutes from './routes/uploaded-protocol-details.route';
+import questionnaireRoutes from './routes/questionnaire.route';
+
 dotenv.config();
 const app = express();
 
@@ -29,6 +31,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/auth', authRoutes);
 app.use('/api/file', fileUploadRoutes);
 app.use('/api/protocol-details', protocolDetailsRoutes);
+
+app.use('/api/questionnaire', questionnaireRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

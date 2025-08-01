@@ -2,9 +2,7 @@ import fs from 'fs';
 import pdfParse from 'pdf-parse';
 import ProtocolDocument from '../models/protocol-document.schema';
 import UploadedProtocolDetails from '../models/uploaded-protocol-details.schema';
-import OpenAI from 'openai';
-
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+import openai from '../config/openai';
 
 export class FileUploadService {
   static splitTextIntoChunks(text: string, maxLength = 2000): string[] {

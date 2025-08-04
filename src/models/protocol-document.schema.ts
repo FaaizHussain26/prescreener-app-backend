@@ -1,39 +1,31 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Document, Schema } from "mongoose";
 
-export interface IProtocolDocumentChunk {
+export interface IProtocolDocument extends Document {
   text: string;
   embedding: number[];
   page: number;
+  chunk: number;
+  protocol_id: string;
+  file_id: mongoose.Types.ObjectId;
 }
-
-export interface IProtocolDocument extends Document {
-  filename: string;
-  originalname: string;
-  mimetype: string;
-  size: number;
-  chunks: IProtocolDocumentChunk[];
-  uploadedAt: Date;
-}
-
-const ProtocolDocumentChunkSchema = new Schema<IProtocolDocumentChunk>(
-  {
-    text: { type: String, required: true },
-    embedding: { type: [Number], required: true },
-    page: { type: Number, required: true }
-  },
-  { _id: false }
-);
 
 const ProtocolDocumentSchema = new Schema<IProtocolDocument>(
   {
-    filename: { type: String, required: true },
-    originalname: { type: String, required: true },
-    mimetype: { type: String, required: true },
-    size: { type: Number, required: true },
-    chunks: { type: [ProtocolDocumentChunkSchema], required: true },
-    uploadedAt: { type: Date, default: Date.now }
+    text: { type: String, required: true },
+    embedding: { type: [Number], required: true },
+    page: { type: Number, required: true },
+    chunk: { type: Number, required: true },
+    protocol_id: { type: String, required: true, index: true },
+    file_id: {
+      type: Schema.Types.ObjectId,
+      ref: "uploaded-files",
+      required: true,
+    },
   },
   { timestamps: true }
 );
 
-export default mongoose.model<IProtocolDocument>('protocol-documents', ProtocolDocumentSchema);
+export default mongoose.model<IProtocolDocument>(
+  "protocol-documents",
+  ProtocolDocumentSchema
+);

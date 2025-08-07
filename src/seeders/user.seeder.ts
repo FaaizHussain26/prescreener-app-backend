@@ -7,8 +7,6 @@ import connectDB from '../config/database';
 
 dotenv.config();
 
-console.log('MONGO_URI:', process.env.MONGO_URI);
-
 const seedUsers = async () => {
   try {
     await connectDB();

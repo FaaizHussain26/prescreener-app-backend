@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import { FileUploadService } from "../services/file-upload.service";
+import axios from "axios";
+import { webhookUrl } from "../config/webhook";
 
 export class FileUploadController {
   static async uploadPDF(req: Request, res: Response) {
@@ -16,6 +18,15 @@ export class FileUploadController {
             req.body.is_updated === "true" || req.body.is_updated === true,
           protocol_id: req.body.protocol_id,
         });
+
+      await axios.post(webhookUrl, {
+        uploadedFileId: uploadedFile._id,
+        uploadedDetailsId: uploadedDetails._id,
+        pi: req.body.pi,
+        indication: req.body.indication,
+        protocol_id: req.body.protocol_id,
+      });
+
       res.status(201).json({
         message: "PDF processed and stored",
         uploadedFileId: uploadedFile._id,

@@ -1,14 +1,12 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
-
-dotenv.config();
+import { variables } from "../constants/variables";
 
 const connectDB = async () => {
   try {
-    console.log("Connecting to MongoDB with URI:", process.env.MONGO_URI); // Added for debugging
-    console.log("Using database name:", process.env.MONGO_DATABASE_NAME); // Added for debugging
-    await mongoose.connect(process.env.MONGO_URI as string, {
-      dbName: process.env.MONGO_DATABASE_NAME as string,
+    console.log("Connecting to MongoDB with URI:", variables.MONGO_URI);
+    console.log("Using database name:", variables.MONGO_DATABASE_NAME);
+    await mongoose.connect(variables.MONGO_URI, {
+      dbName: variables.MONGO_DATABASE_NAME,
     });
     console.log("MongoDB connected");
   } catch (error) {

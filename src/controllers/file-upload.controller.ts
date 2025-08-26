@@ -19,13 +19,13 @@ export class FileUploadController {
           protocol_id: req.body.protocol_id,
         });
 
-      await axios.post(webhookUrl, {
-        uploadedFileId: uploadedFile._id,
-        uploadedDetailsId: uploadedDetails._id,
-        pi: req.body.pi,
-        indication: req.body.indication,
-        protocol_id: req.body.protocol_id,
-      });
+      // await axios.post(webhookUrl, {
+      //   uploadedFileId: uploadedFile._id,
+      //   uploadedDetailsId: uploadedDetails._id,
+      //   pi: req.body.pi,
+      //   indication: req.body.indication,
+      //   protocol_id: req.body.protocol_id,
+      // });
 
       res.status(201).json({
         message: "PDF processed and stored",

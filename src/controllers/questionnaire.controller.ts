@@ -15,14 +15,14 @@ async function getEmbedding(text: string): Promise<number[]> {
 export class QuestionnaireController {
   static async generate(req: Request, res: Response) {
     try {
-      const { protocol_id, question } = req.body;
-      if (!protocol_id || !question) {
+      const { protocol_id } = req.body;
+      if (!protocol_id) {
         return res
           .status(400)
           .json({ error: "Missing protocol_id or question" });
       }
 
-      const questionEmbedding = await getEmbedding(question);
+      const questionEmbedding = await getEmbedding("inclusion criteria exclusion criteria");
 
       const contextChunks = await ProtocolDocument.aggregate([
         {
@@ -31,10 +31,12 @@ export class QuestionnaireController {
             path: "embedding",
             queryVector: questionEmbedding,
             numCandidates: 100,
-            limit: 10,
-            filter: {
-              protocol_id: { $eq: protocol_id },
-            },
+            limit: 10, 
+          },
+        },
+        {
+          $match: {
+            protocol_id: protocol_id, 
           },
         },
         {
@@ -53,7 +55,7 @@ export class QuestionnaireController {
       }
 
       const context = contextChunks.map((chunk) => chunk.text).join("\n\n");
-      const prompt = generateQuestionnairePrompt(context, question);
+      const prompt = generateQuestionnairePrompt(context);
 
       const completion = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
@@ -70,7 +72,7 @@ export class QuestionnaireController {
         protocol_name: "test",
       });
 
-      res.json({ answer });
+      res.json({ questionnaire: answer });
     } catch (err) {
       console.error(err);
       res

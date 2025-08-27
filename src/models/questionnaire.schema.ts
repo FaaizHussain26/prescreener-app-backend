@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface QuestionnaireDocument extends Document {
-  protocol_id: mongoose.Types.ObjectId | string;
+  protocol_id: string;
   protocol_name: string;
   questionnaire: string;
   createdAt: Date;
@@ -10,7 +10,7 @@ export interface QuestionnaireDocument extends Document {
 
 const QuestionnaireSchema = new Schema<QuestionnaireDocument>(
   {
-    protocol_id: { type: Schema.Types.ObjectId, ref: 'ProtocolDocument', required: true },
+    protocol_id: { type: String, required: true },
     protocol_name: { type: String, required: true },
     questionnaire: { type: String, required: true },
   },

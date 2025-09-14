@@ -13,6 +13,7 @@ import swaggerUi from "swagger-ui-express";
 import cors from "cors";
 import protocolDetailsRoutes from "./routes/uploaded-protocol-details.route";
 import questionnaireRoutes from "./routes/questionnaire.route";
+import interestFormRoutes from "./routes/interest-form.route";
 import { variables } from "./constants/variables";
 
 const app = express();
@@ -42,8 +43,8 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api/auth", authRoutes);
 app.use("/api/file", fileUploadRoutes);
 app.use("/api/protocol-details", protocolDetailsRoutes);
-
 app.use("/api/questionnaire", questionnaireRoutes);
+app.use("/api/interest-form", interestFormRoutes);
 
 app.listen(variables.PORT, () =>
   console.log(`Server running on port ${variables.PORT}`)

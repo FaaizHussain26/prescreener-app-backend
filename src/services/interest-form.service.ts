@@ -291,14 +291,15 @@ Please generate a detailed questionnaire that:
 
 1. Directly reflects the inclusion criteria mentioned in the protocol documents
 2. Directly reflects the exclusion criteria mentioned in the protocol documents  
-3. Includes demographic questions (age, gender, contact information)
+3. Includes demographic questions (age, gender, contact information, height and weight)
 4. Covers medical history questions based on the specific criteria
 5. Addresses current medications and allergies as specified in the criteria
 6. Includes lifestyle factors mentioned in the protocol criteria
 7. Asks about availability and commitment to the study
 8. Any other specific requirements mentioned in the protocol documents
 
-Format the questions in a clear, numbered list that can be easily administered to potential participants. Make sure each question is directly based on the actual inclusion/exclusion criteria provided in the protocol context, not generic clinical trial questions.`;
+Format the questions in a clear, numbered list that can be easily administered to potential participants. Make sure each question is directly based on the actual inclusion/exclusion criteria provided in the protocol context, not generic clinical trial questions and
+Convert the following text into a JSON-safe string. Replace all line breaks, tabs, and extra spaces with \n so that the text can be used inside JSON without errors. Keep formatting intact but JSON-friendly.`;
   }
 
   private truncateContentForContext(chunks: any[]): any[] {

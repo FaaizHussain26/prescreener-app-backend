@@ -3,6 +3,7 @@ import UploadedProtocolDetails from "../models/uploaded-protocol-details.schema"
 import ProtocolDocument from "../models/protocol-document.schema";
 import PatientQuestions from "../models/patient-questions.schema";
 import { generateQuestionnairePrompt } from "../constants/prompts";
+import { buildQuestionPrompt } from "../constants/prompts";
 
 export interface InterestFormData {
   firstName: string;
@@ -200,7 +201,7 @@ export class InterestFormService {
 
   private async generateQuestions(context: string, studyOfInterest: string[]) {
     try {
-      const prompt = this.buildQuestionPrompt(context, studyOfInterest);
+      const prompt = buildQuestionPrompt(context, studyOfInterest);
 
       // Check if prompt is too long and truncate if necessary
       const maxPromptLength = 50000; // Conservative limit
@@ -242,7 +243,7 @@ export class InterestFormService {
         console.log("Context too long, trying with truncated context...");
         const truncatedContext =
           context.substring(0, 20000) + "\n\n[Context truncated due to length]";
-        const truncatedPrompt = this.buildQuestionPrompt(
+        const truncatedPrompt = buildQuestionPrompt(
           truncatedContext,
           studyOfInterest
         );
@@ -277,30 +278,7 @@ export class InterestFormService {
     }
   }
 
-  private buildQuestionPrompt(context: string, studyOfInterest: string[]) {
-    return `Based on the following clinical trial protocol context and the patient's areas of interest, generate a comprehensive screening questionnaire.
-
-IMPORTANT: Use the ACTUAL inclusion and exclusion criteria from the protocol documents provided below. Do not generate generic questions - base your questions directly on the specific criteria mentioned in the protocol context.
-
-Study Areas of Interest: ${studyOfInterest.join(", ")}
-
-Protocol Context (Inclusion/Exclusion Criteria):
-${context}
-
-Please generate a detailed questionnaire that:
-
-1. Directly reflects the inclusion criteria mentioned in the protocol documents
-2. Directly reflects the exclusion criteria mentioned in the protocol documents  
-3. Includes demographic questions (age, gender, contact information, height and weight)
-4. Covers medical history questions based on the specific criteria
-5. Addresses current medications and allergies as specified in the criteria
-6. Includes lifestyle factors mentioned in the protocol criteria
-7. Asks about availability and commitment to the study
-8. Any other specific requirements mentioned in the protocol documents
-
-Format the questions in a clear, numbered list that can be easily administered to potential participants. Make sure each question is directly based on the actual inclusion/exclusion criteria provided in the protocol context, not generic clinical trial questions and
-Convert the following text into a JSON-safe string. Replace all line breaks, tabs, and extra spaces with \n so that the text can be used inside JSON without errors. Keep formatting intact but JSON-friendly.`;
-  }
+ 
 
   private truncateContentForContext(chunks: any[]): any[] {
     const maxTokens = 12000; // Leave room for prompt and response

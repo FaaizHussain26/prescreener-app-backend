@@ -24,6 +24,7 @@ export class FileUploadService {
       enrollment_startDate: Date;
       is_updated: boolean;
       protocol_id: string;
+      site_id: string;
     }
   ) {
     let processingSucceeded = false;
@@ -63,6 +64,7 @@ export class FileUploadService {
             page: idx + 1,
             chunk: subIdx + 1,
             protocol_id: details.protocol_id,
+            site_id: details.site_id,
             file_id: uploadedFile._id,
           }));
           chunkPromises.push(promise);

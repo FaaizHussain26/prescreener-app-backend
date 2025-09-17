@@ -6,6 +6,7 @@ export interface IProtocolDocument extends Document {
   page: number;
   chunk: number;
   protocol_id: string;
+  site_id: string;
   file_id: mongoose.Types.ObjectId;
 }
 
@@ -16,6 +17,7 @@ const ProtocolDocumentSchema = new Schema<IProtocolDocument>(
     page: { type: Number, required: true },
     chunk: { type: Number, required: true },
     protocol_id: { type: String, required: true, index: true },
+    site_id: { type: String, required: true, index: true },
     file_id: {
       type: Schema.Types.ObjectId,
       ref: "uploaded-files",

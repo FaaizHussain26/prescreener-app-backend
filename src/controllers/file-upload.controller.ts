@@ -17,6 +17,7 @@ export class FileUploadController {
           is_updated:
             req.body.is_updated === "true" || req.body.is_updated === true,
           protocol_id: req.body.protocol_id,
+          site_id: req.body.site_id,
         });
 
       // await axios.post(webhookUrl, {

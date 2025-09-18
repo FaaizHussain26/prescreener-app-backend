@@ -20,6 +20,8 @@ export interface IPatientQuestions extends Document {
   zipCode?: string;
   specialInstruction?: string;
   acceptTerms: boolean;
+  // patient_id
+  patientId?: string;
   
   // Generated questions
   questions: string;
@@ -54,6 +56,7 @@ const PatientQuestionsSchema = new Schema<IPatientQuestions>(
     zipCode: { type: String },
     specialInstruction: { type: String },
     acceptTerms: { type: Boolean, required: true },
+    patientId: { type: String },
     
     questions: { type: String, required: true },
     

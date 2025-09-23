@@ -16,6 +16,8 @@ import questionnaireRoutes from "./routes/questionnaire.route";
 import interestFormRoutes from "./routes/interest-form.route";
 import patientFollowupStatusRoutes from "./routes/patient-followup-status.route";
 import { variables } from "./constants/variables";
+import manualscreening from"./routes/manual-screening.route"
+
 
 const app = express();
 
@@ -51,6 +53,7 @@ app.use("/api/file", fileUploadRoutes);
 app.use("/api/protocol-details", protocolDetailsRoutes);
 app.use("/api/questionnaire", questionnaireRoutes);
 app.use("/api/interest-form", interestFormRoutes);
+app.use("/api/manual-screening",manualscreening)
 app.use("/api/patient-followup-status", patientFollowupStatusRoutes);
 
 app.listen(variables.PORT, () =>

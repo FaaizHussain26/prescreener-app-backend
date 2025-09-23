@@ -1,14 +1,10 @@
 import { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
-import { OpenAI } from "openai";
+import openai from "../config/openai";
 
 import protocolDocumentSchema from "../models/protocol-document.schema";
 import ManualScreening from "../models/manual-screening.schema";
 import { ManualScreeningPrompt } from "../constants/prompts";
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
 
 // helper to get embedding
 async function getEmbedding(text: string): Promise<number[]> {

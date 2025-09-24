@@ -16,7 +16,9 @@ import questionnaireRoutes from "./routes/questionnaire.route";
 import interestFormRoutes from "./routes/interest-form.route";
 import patientFollowupStatusRoutes from "./routes/patient-followup-status.route";
 import { variables } from "./constants/variables";
-import manualscreening from "./routes/manual-screening.route";
+import manualscreening from"./routes/manual-screening.route";
+import dashboardRoutes from "./routes/dashboard.route";
+
 
 const app = express();
 
@@ -49,6 +51,7 @@ app.use("/api/questionnaire", questionnaireRoutes);
 app.use("/api/interest-form", interestFormRoutes);
 app.use("/api/manual-screening", manualscreening);
 app.use("/api/patient-followup-status", patientFollowupStatusRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 
 app.listen(variables.PORT, () =>
   console.log(`Server running on port ${variables.PORT}`)

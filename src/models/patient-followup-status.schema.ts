@@ -39,11 +39,6 @@ export interface IPatientFollowupStatus extends Document {
 
 const PatientFollowupStatusSchema: Schema = new Schema(
   {
-    followup_id: {
-      type: String,
-      required: true,
-      unique: true,
-    },
     patient_id: {
       type: Number,
       required: true,
@@ -62,6 +57,11 @@ const PatientFollowupStatusSchema: Schema = new Schema(
       unique: true,
     },
     call_status: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    iseligible: {
       type: Boolean,
       required: true,
       default: false,
@@ -95,49 +95,6 @@ const PatientFollowupStatusSchema: Schema = new Schema(
       type: String,
       required: true,
     },
-    followup_type: {
-      type: String,
-      required: true,
-      enum: ["initial", "reminder", "reschedule", "confirmation", "followup"],
-      default: "initial",
-    },
-    followup_status: {
-      type: String,
-      required: true,
-      enum: [
-        "scheduled",
-        "completed",
-        "cancelled",
-        "rescheduled",
-        "no_answer",
-        "busy",
-        "failed",
-      ],
-      default: "scheduled",
-    },
-    next_followup_date: {
-      type: Date,
-      default: null,
-    },
-    notes: {
-      type: String,
-      default: null,
-    },
-    appointment_id: {
-      type: Schema.Types.ObjectId,
-      ref: "Appointment",
-      default: null,
-    },
-    lead_id: {
-      type: Schema.Types.ObjectId,
-      ref: "Lead",
-      default: null,
-    },
-    study_id: {
-      type: Schema.Types.ObjectId,
-      ref: "Study",
-      default: null,
-    },
   },
   {
     timestamps: true,
@@ -148,10 +105,7 @@ const PatientFollowupStatusSchema: Schema = new Schema(
 // Indexes for better query performance
 PatientFollowupStatusSchema.index({ patient_id: 1 });
 PatientFollowupStatusSchema.index({ patient_contactno: 1 });
-PatientFollowupStatusSchema.index({ followup_status: 1 });
-PatientFollowupStatusSchema.index({ followup_type: 1 });
 PatientFollowupStatusSchema.index({ time_utc: 1 });
-// PatientFollowupStatusSchema.index({ conversation_id: 1 });
 
 export default mongoose.model<IPatientFollowupStatus>(
   "patient_followup_status",

@@ -4,7 +4,7 @@ import openai from "../config/openai";
 
 import protocolDocumentSchema from "../models/protocol-document.schema";
 import ManualScreening from "../models/manual-screening.schema";
-import { ManualScreeningPrompt } from "../constants/prompts";
+import { manualScreeningPrompt } from "../constants/prompts";
 
 // helper to get embedding
 async function getEmbedding(text: string): Promise<number[]> {
@@ -90,7 +90,7 @@ export class ManualScreeningController {
       const messages = [
         {
           role: "system" as const,
-          content: ManualScreeningPrompt(finalContext),
+          content: manualScreeningPrompt(finalContext),
         },
         ...history.map((msg) => ({
           role: msg.role as "user" | "assistant",

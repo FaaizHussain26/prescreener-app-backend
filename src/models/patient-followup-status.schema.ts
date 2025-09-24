@@ -87,7 +87,7 @@ const PatientFollowupStatusSchema: Schema = new Schema(
       type: Date,
       required: true,
     },
-    call_dusation_secs: {
+    call_duration_secs: {
       type: Number,
       default: null,
     },
@@ -141,7 +141,7 @@ const PatientFollowupStatusSchema: Schema = new Schema(
   },
   {
     timestamps: true,
-    collection: "Patient_Followup_Status",
+    collection: "patient_followup_status",
   }
 );
 
@@ -151,9 +151,9 @@ PatientFollowupStatusSchema.index({ patient_contactno: 1 });
 PatientFollowupStatusSchema.index({ followup_status: 1 });
 PatientFollowupStatusSchema.index({ followup_type: 1 });
 PatientFollowupStatusSchema.index({ time_utc: 1 });
-PatientFollowupStatusSchema.index({ conversation_id: 1 });
+// PatientFollowupStatusSchema.index({ conversation_id: 1 });
 
 export default mongoose.model<IPatientFollowupStatus>(
-  "Patient_Followup_Status",
+  "patient_followup_status",
   PatientFollowupStatusSchema
 );

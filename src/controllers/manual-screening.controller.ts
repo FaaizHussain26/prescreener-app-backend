@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { v4 as uuidv4 } from "uuid";
+const { v4: uuidv4 } = require("uuid");
 import openai from "../config/openai";
 
 import protocolDocumentSchema from "../models/protocol-document.schema";

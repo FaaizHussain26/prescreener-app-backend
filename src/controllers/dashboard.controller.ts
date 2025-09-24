@@ -9,7 +9,7 @@ export class DashboardController {
       call_status: { $eq: true },
     });
     const totalEligible = await patientFollowupStatusSchema.countDocuments({
-      is_eligible: { $eq: true },
+      iseligible: { $eq: true },
     });
 
     let callPercentage: string = "0%";

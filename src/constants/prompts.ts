@@ -1,6 +1,4 @@
-export const generateQuestionnairePrompt = (
-  context: string,
-) => {
+export const generateQuestionnairePrompt = (context: string) => {
   return `You are an expert in clinical trials. Your task is to answer the following question based *only* on the provided context from a clinical trial protocol.
 
 # Context
@@ -10,8 +8,10 @@ Generate a questionnaire based on the provided context from a clinical trial pro
 `;
 };
 
-
-export const buildQuestionPrompt = (context: string, studyOfInterest: string[]) => {
+export const buildQuestionPrompt = (
+  context: string,
+  studyOfInterest: string[]
+) => {
   return `Based on the following clinical trial protocol context and the patient's areas of interest, generate a comprehensive screening questionnaire.
 
 IMPORTANT: Use the ACTUAL inclusion and exclusion criteria from the protocol documents provided below. Do not generate generic questions - base your questions directly on the specific criteria mentioned in the protocol context.
@@ -34,11 +34,9 @@ IMPORTANT:
 - Base questions directly on the actual protocol criteria provided
 - Return only the formatted string, not wrapped in JSON
 - Ensure the text is JSON-safe for storage in MongoDB`;
-}
+};
 
-export const  ManualScreeningPrompt = (
-  context: string,
-) => {
+export const manualScreeningPrompt = (context: string) => {
   return `You are a clinical trial screening assistant. Your task is to screen a patient strictly against all inclusion and exclusion criteria from the trial protocol.
 
 Instructions:
@@ -54,5 +52,5 @@ Only ask the next question after receiving the answer to the previous one.
 Do not explain all rules or criteria at once.
 
 Protocol Information:
-${context}`
-}
+${context}`;
+};

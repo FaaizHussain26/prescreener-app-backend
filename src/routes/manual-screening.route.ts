@@ -1,7 +1,7 @@
-import express from "express";
+import { Router } from 'express';
 import { ManualScreeningController } from "../controllers/manual-screening.controller";
 
-const router = express.Router();
+const router = Router();
 
 router.post(
   "/chat/:protocol_id",

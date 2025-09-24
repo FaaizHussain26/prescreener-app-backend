@@ -8,23 +8,9 @@ Generate a questionnaire based on the provided context from a clinical trial pro
 `;
 };
 
-<<<<<<< Updated upstream
-export const buildQuestionPrompt = (
-  context: string,
-  studyOfInterest: string[]
-) => {
-  return `Based on the following clinical trial protocol context and the patient's areas of interest, generate a comprehensive screening questionnaire.
-
-IMPORTANT: Use the ACTUAL inclusion and exclusion criteria from the protocol documents provided below. Do not generate generic questions - base your questions directly on the specific criteria mentioned in the protocol context.
-
-Study Areas of Interest: ${studyOfInterest.join(", ")}
-
-=======
-
 export const buildQuestionPrompt = (context: string, studyOfInterest: string[]) => {
   return `You are a medically trained assistant tasked with building a professional, patient-friendly, and adaptive screening questionnaire. The goal is to confirm if the patient is eligible for a specific clinical trial based on the provided protocol context. Always communicate with kindness, confidence, and medical professionalism—like a skilled research coordinator guiding a patient.
  
->>>>>>> Stashed changes
 Protocol Context (Inclusion/Exclusion Criteria):
 ${context}
  
@@ -73,13 +59,8 @@ IMPORTANT:
 - Embed early exit logic in the flow so unnecessary questions are skipped when eligibility is already determined
 - Adapt dynamically to studyOfInterest first, then broaden if no match
 - Return only the formatted string, not wrapped in JSON
-<<<<<<< Updated upstream
-- Ensure the text is JSON-safe for storage in MongoDB`;
-};
-=======
 - Ensure text is JSON-safe for storage in MongoDB`;
 }
->>>>>>> Stashed changes
 
 export const manualScreeningPrompt = (context: string) => {
   return `You are a clinical trial screening assistant. Your task is to screen a patient strictly against all inclusion and exclusion criteria from the trial protocol.

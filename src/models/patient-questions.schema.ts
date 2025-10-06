@@ -30,7 +30,7 @@ export interface IPatientQuestions extends Document {
   protocol_id?: string;
   protocol_name?: string;
   indication?: string;
-  
+  status?:boolean;
   // Metadata
   createdAt?: Date;
   updatedAt?: Date;
@@ -63,6 +63,7 @@ const PatientQuestionsSchema = new Schema<IPatientQuestions>(
     protocol_id: { type: String },
     protocol_name: { type: String },
     indication: { type: String },
+    status: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
